@@ -1,0 +1,66 @@
+<?php
+header('Content-Type: application/json');
+
+// --- 1. CONFIGURATION ---
+$base_dir = "../../site/file/source/"; 
+$dest_dir = "../../site/file/source/optimized/";
+
+$src_raw = $_POST['src'] ?? ''; 
+$src_path = str_replace(['../', './'], '', $src_raw);
+
+// --- 2. LOGIQUE DE RECHERCHE D'IMAGE ---
+$full_src_path = "";
+
+// On teste deux possibilités :
+$test_paths = [
+    $base_dir . $src_path,                       // Cas 1 : galerie/space/image.jpg
+    $base_dir . basename($src_path),             // Cas 2 : juste le nom de fichier
+    realpath($base_dir) . DIRECTORY_SEPARATOR . $src_path // Cas 3 : Chemin absolu
+];
+
+foreach ($test_paths as $path) {
+    if (file_exists($path) && is_file($path)) {
+        $full_src_path = $path;
+        break;
+    }
+}
+
+if (empty($full_src_path)) {
+    echo json_encode([
+        'status' => 'error', 
+        'error' => 'Image introuvable. Tenté : ' . $src_path,
+        'debug_base' => realpath($base_dir)
+    ]);
+    exit;
+}
+
+// --- 3. TRAITEMENT ---
+$info = getimagesize($full_src_path);
+$image = null;
+switch ($info['mime']) {
+    case 'image/jpeg': $image = imagecreatefromjpeg($full_src_path); break;
+    case 'image/png':  $image = imagecreatefrompng($full_src_path); break;
+    case 'image/webp': $image = imagecreatefromwebp($full_src_path); break;
+}
+
+if (!$image) {
+    echo json_encode(['status' => 'error', 'error' => 'Format non supporté ou fichier corrompu']);
+    exit;
+}
+
+// Destination : on garde le nom original mais en .avif dans le dossier optimized
+$filename = pathinfo($full_src_path, PATHINFO_FILENAME) . '.avif';
+if (!is_dir($dest_dir)) mkdir($dest_dir, 0755, true);
+$outputPath = $dest_dir . $filename;
+
+// Conversion
+if (imageavif($image, $outputPath, 65)) {
+    echo json_encode([
+        'status'  => 'success',
+        'gain'    => round((1 - (filesize($outputPath) / filesize($full_src_path))) * 100) . '%'
+    ]);
+} else {
+    echo json_encode(['status' => 'error', 'error' => 'Échec de conversion AVIF']);
+}
+
+imagedestroy($image);

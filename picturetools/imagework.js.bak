@@ -1,0 +1,57 @@
+(function() {
+    function injectBtn(doc) {
+        const figures = doc.querySelectorAll('figure[data-name]');
+        
+        figures.forEach(fig => {
+            // Priorité au data-path (chemin complet) sinon data-name
+            const pathValue = fig.getAttribute('data-path') || fig.getAttribute('data-name');
+            
+            if (pathValue && pathValue.match(/\.(jpg|jpeg|png)$/i) && !fig.querySelector('.p-tools')) {
+                const btn = document.createElement('div');
+                btn.className = 'p-tools';
+                btn.innerHTML = '⚡';
+                btn.style = "position:absolute;top:5px;right:5px;background:#28a745;color:#fff;padding:2px 6px;border-radius:3px;cursor:pointer;z-index:1000;font-weight:bold;";
+                
+                btn.onclick = function(e) {
+                    e.preventDefault(); 
+                    e.stopPropagation();
+                    
+                    if(confirm("Optimiser : " + pathValue + " ?")) {
+                        console.log("Envoi au PHP :", pathValue); // Pour débugger
+                        
+                        const fd = new FormData();
+                        fd.append('src', pathValue);
+                        
+                        fetch('core/picturetools/img_processor.php', { method: 'POST', body: fd })
+                        .then(r => r.json())
+                        .then(data => {
+                            if(data.status === 'success') {
+                                alert("OK ! Gain : " + data.gain);
+                            } else {
+                                alert("Erreur : " + data.error);
+                            }
+                        })
+                        .catch(err => {
+                            console.error("Erreur Fetch :", err);
+                            alert("Erreur de communication avec le serveur.");
+                        });
+                    }
+                };
+                fig.appendChild(btn);
+            }
+        });
+    }
+
+    function scan() {
+        injectBtn(document);
+        const iframes = document.querySelectorAll('iframe');
+        iframes.forEach(iframe => {
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                if (iframeDoc) injectBtn(iframeDoc);
+            } catch (e) {}
+        });
+    }
+
+    setInterval(scan, 2000);
+})();

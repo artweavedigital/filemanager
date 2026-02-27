@@ -1,0 +1,1988 @@
+/**
+ * This file is part of Zwii.
+ * For full copyright and license information, please see the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @author Rémi Jean <remi.jean@outlook.com>
+ * @copyright Copyright (C) 2008-2018, Rémi Jean
+ * @author Frédéric Tempez <frederic.tempez@outlook.com>
+ * @copyright Copyright (C) 2018-2025, Frédéric Tempez
+ * @license CC Attribution-NonCommercial-NoDerivatives 4.0 International 
+ * @Copyright (C) 2026, Frédéric Tempez
+ * @Licensed under the GNU General Public License v3.0 or later.
+ * @link http://zwiicms.fr/
+ */
+
+
+/**
+* Police des icônes
+@import url(https://use.fontawesome.com/releases/v5.7.2/css/all.css);
+*/
+
+
+/**
+ * Éléments génériques
+ */
+
+html,
+body {
+    min-height: 100%;
+    /*min-height: 100vh;*/
+}
+
+
+
+
+
+
+/**
+ * Éléments spécifiques
+ */
+
+
+/* Liens */
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* Supprimer les pointillés lors d'un clic Firefox */
+
+a:focus {
+    outline: none;
+}
+
+a:active {
+    outline: none;
+}
+
+
+/* Titres */
+
+h1 {
+    font-size: 1.8em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1.4em;
+}
+
+h4, details {
+    font-size: 1.0em;
+}
+
+
+/* Listes */
+
+ul {
+    list-style: square;
+}
+
+li ul {
+    margin: 0;
+}
+
+option.pageInactive {
+    color: orange;
+    font-weight: bold;
+}
+
+option.pageHidden {
+    color: red;
+    font-style: italic;
+}
+
+
+/* Séparateur */
+
+hr {
+    border: 0;
+    border-top: 1px solid #C5D1D4;
+}
+
+
+/* Égalisation des margins */
+
+h1,
+h2,
+h3,
+h4,
+p,
+hr,
+ul,
+ol,
+details {
+    margin: 15px 0;
+}
+
+
+/* Image */
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+img[align='left'] {
+    margin-right: 10px;
+}
+
+img[align='right'] {
+    margin-left: 10px;
+}
+
+#metaImage {
+    height: 150px;
+}
+
+
+/*
+Signature dans les articles blog et news
+*/
+
+.signature {
+    font-size: 0.8em;
+    font-style: italic;
+    text-align: right;
+}
+
+
+/* Tableau */
+
+:not([class^="col"])>.tableWrapper {
+    margin: 10px 0;
+}
+
+.table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.table thead tr {
+    /*background: #212223;
+	color: #FFF;*/
+    text-align: left;
+}
+
+.table tbody tr {
+    background: #F6F7F8;
+    transition: background-color .3s ease-out;
+}
+
+.table tbody tr:nth-child(2n + 2) {
+    background: #ECEFF1;
+}
+
+.table tbody tr:hover {
+    background: #FCF2E8;
+}
+
+.table th {
+    font-weight: normal;
+    padding: 15px 10px;
+}
+
+
+/* Supprime le padding des cols dans les cellules des tableaux */
+
+td>.col1,
+td>.col2,
+td>.col3,
+td>.col4,
+td>.col5,
+td>.col6,
+td>.col7,
+td>.col8,
+td>.col9,
+td>.col10,
+td>.col11,
+td>.col12 {
+    padding: 0 !important;
+}
+
+
+
+
+/* Notifications */
+
+#notification {
+    padding: 14px;
+    color: #FFF;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 500px;
+    width: 100%;
+    z-index: 1100;
+    text-align: center;
+    animation: notificationBounce .5s;
+    top: 30px;
+    border-radius: 2px;
+}
+
+#notification.notificationSuccess {
+    background: #27AE60;
+}
+
+#notification.notificationError {
+    background: #E74C3C;
+}
+
+#notification.notificationOther {
+    background: #F39C12;
+}
+
+#notificationClose {
+    cursor: pointer;
+    float: right;
+    opacity: .8;
+}
+
+#notificationProgress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 6px;
+    border-radius: 2px;
+}
+
+#notification.notificationSuccess #notificationProgress {
+    background: #219251;
+}
+
+#notification.notificationError #notificationProgress {
+    background: #D62C1A;
+}
+
+#notification.notificationOther #notificationProgress {
+    background: #D8890B;
+}
+
+#notificationClose:hover {
+    opacity: 1;
+}
+
+@keyframes notificationBounce {
+    0% {
+        transform: translateX(-50%) translateY(-30px);
+    }
+    40% {
+        transform: translateX(-50%) translateY(10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    80% {
+        transform: translateX(-50%) translateY(5px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+
+/* Notice */
+
+.notice {
+    display: inline-block;
+    color: #E74C3C;
+}
+
+/* Asterisque des champs obligatoires */
+.required-field::after {
+    content: '\00204E';
+    color: #E74C3C;
+    margin-left: 4px;
+    font-size: larger;
+}
+
+
+/* Mauvaise position dans les champs File
+.inputFile.notice {
+	display: block;
+}*/
+
+
+/* Container */
+
+.container {
+    margin: auto;
+}
+
+.container-large {
+    width: 100%;
+}
+
+.container-large-fixed {
+    width: 100%;
+    position: fixed;
+    z-index: 15;
+}
+
+
+/* Barre de membre */
+
+#bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #212223;
+    padding-left: 5px;
+    margin: 0;
+    /* Masquée par défaut avec transform pour l'animation */
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    /* S'assure que la barre n'affecte pas le flux du document */
+    pointer-events: none;
+}
+
+#bar.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Style pour la barre en mode fixe */
+#bar.fixed {
+    position: fixed;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Ajoute un padding au body uniquement quand la barre est en mode fixe */
+body.bar-fixed {
+    padding-top: 45px;
+}
+
+
+
+/* fin barre pour les membres */
+
+#bar:after {
+    content: " ";
+    clear: both;
+    display: block;
+}
+
+#bar ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 45px;
+    line-height: 45px;
+}
+
+#bar li {
+    display: inline;
+}
+
+#bar a {
+    display: inline-block;
+    padding: 0 10px;
+    color: #FFF;
+    transition: background-color .3s ease-out;
+}
+
+#bar a:hover {
+    background: #191A1A;
+    text-decoration: none;
+}
+
+#bar a:active {
+    background: #111112;
+}
+
+#bar select {
+    width: 220px;
+    border: 0;
+    color: #111112;
+    font-size: 1em;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 5px;
+    margin: 5px;
+}
+
+
+
+
+/* Site */
+
+#site {
+    overflow: hidden;
+}
+
+
+/* Dans theme.css
+@media screen and (min-width:768px) {
+	#site {
+		margin: 20px auto;
+	}
+}#barSelectPage
+*/
+
+
+header {
+    position: relative;
+    padding: 0;
+}
+
+header span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.2;
+    margin: 0 10px;
+}
+
+header .container {
+    overflow: hidden;
+    height: 100%;
+}
+
+
+/* Marges au contenu de la bannière personnalisée
+header:not(.container) #featureContent {
+	margin: 0 10px;
+}*/
+
+header #featureContent {
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+
+/* Element du header
+
+#themeHeaderImage {
+	font-style: italic;
+	font-size: 0.9em;
+}*/
+
+
+/* Menu
+body > nav {
+	margin: 0 -10px;
+}
+*/
+
+
+/* Items du menu */
+
+
+
+nav a>img {
+    margin: -4px 0;
+    vertical-align: middle;
+}
+
+nav #toggle {
+    cursor: pointer;
+    text-align: right;
+    display: none;
+    font-weight: bold;
+}
+
+nav #toggle span {
+    display: block;
+}
+
+nav #burgerText {
+    float: left;
+    font-size: 1.4em;
+    margin: 15px 0 0 10px;
+}
+
+nav #burgerLogo {
+    float: left;
+    margin: 5px 0 0 5px;
+}
+
+nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    position: relative;
+    align-self: center;
+}
+
+nav li ul {
+    display: block;
+    position: absolute;
+    width: 200px;
+    z-index: -1;
+    opacity: 0;
+    transition: .3s ease-out;
+    padding-left: 10px;
+}
+
+nav li ul li {
+    display: block;
+    text-align: left;
+}
+
+
+/*
+nav .navSub a{
+	background-color:red !important;
+}*/
+
+nav li:hover ul {
+    z-index: 8;
+    opacity: 1;
+}
+
+nav a {
+    display: inherit;
+    transition: background-color .3s ease-out;
+}
+
+nav a:hover {
+    text-decoration: none;
+}
+
+
+/* Barre de menu */
+
+#menuLeft {
+    display: inline-flex;
+}
+
+#menuRight {
+    display: inline-flex;
+    float: right;
+}
+
+
+/* fin barre de menu */
+
+nav::after {
+    content: " ";
+    clear: both;
+    display: flex;
+}
+
+nav::before {
+    content: " ";
+    clear: left;
+    display: flex;
+}
+
+/* Sous-menus multi-niveaux (règles génériques, hors thème) */
+[class*="navSubmenu"] {
+    display: none;
+    position: absolute;
+    width: 200px;
+    margin-left: 0;
+    padding-left: 0;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+[class*="navLevel"] {
+    padding-left: 15px;
+}
+
+.navDepth1 > ul[class*="navSubmenu"],
+.navDepth2 > ul[class*="navSubmenu"],
+.navDepth3 > ul[class*="navSubmenu"],
+.navDepth4 > ul[class*="navSubmenu"] {
+    top: 20px;
+    left: 50%;
+}
+
+@media screen and (min-width: 769px) {
+    nav #menu {
+        display: block;
+    }
+}
+
+
+/* Barre de navigation fixe quand le menu est en-dehors du site */
+
+#navfixedlogout {
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+    top: 0px;
+    z-index: 10;
+}
+
+#navfixedconnected {
+    top: 45px;
+    z-index: 10;
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+}
+
+#navfixedconnected .navSub,
+#navfixedlogout .navSub {
+    pointer-events: auto;
+}
+
+/* Menu vertical */
+
+.menuSide,
+.menuSideChild {
+    padding-left: 10px;
+    margin: 0px;
+    list-style: none;
+}
+
+ul .menuSideChild,
+li .menuSideChild {
+    padding-left: 10px;
+}
+
+
+/* Drapeaux */
+
+.i18nFlag {
+    width: 70%;
+}
+
+.i18nFlagSelected {
+    width: 100%;
+}
+
+
+
+section {
+    /*min-height: 100%;*/
+    min-height: 65vh;
+}
+
+section #sectionTitle {
+    margin-top: 0;
+}
+
+.userLogin,
+.updateForm {
+    min-height: 0px;
+}
+
+section:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+
+/* Version des modules*/
+
+.moduleVersion {
+    font-size: 0.8em;
+    font-style: italic;
+    text-align: right;
+}
+
+
+/* Pied de page */
+
+body>footer {
+    margin: 0;
+    /* -10px;*/
+}
+
+
+/*
+footer {
+	padding: 1px 20px;
+}
+*/
+
+#footerbody,
+#footersite {
+    margin: 0;
+}
+
+.footerbodyFixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    background-color: inherit;
+    padding: inherit;
+}
+
+.footerbodyFixed#bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+}
+
+#bar.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#barToggle {
+    display: none; /* On cache le bouton car il n'est plus nécessaire */
+}
+
+/* Animation pour la zone sensible en haut de l'écran */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    z-index: 1001;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+body:hover::before {
+    opacity: 1;
+}
+
+#footerbodyLeft,
+#footerbodyCenter {
+    vertical-align: middle;
+    padding: 0;
+}
+
+footer #footerbody>div {
+    margin: 0
+}
+
+footer #footersite>div {
+    padding: 0
+}
+
+footer #footerbody>div {
+    padding: 0
+}
+
+#footerText>p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#footerLoginLink,
+#footerDisplayCopyright,
+#footerDisplayVersion,
+#footerDisplaySiteMap,
+#footerDisplayLegal,
+#footerDisplayCookie,
+#footerDisplaySearch,
+#footerZwiiCMS {
+    font-size: inherit;
+}
+
+
+
+
+footer #footerSocials span {
+    color: #FFF;
+    padding: 9px;
+    margin: 0 5px;
+    display: inline-block;
+    border-radius: 2px;
+    transition: background-color .3s ease-out;
+}
+
+footer #footerSocials .zwiico-facebook {
+    background: #3B5999;
+}
+
+footer #footerSocials .zwiico-facebook:hover {
+    background: #324B80;
+}
+
+footer #footerSocials .zwiico-linkedin {
+    background: #007BB6;
+}
+
+footer #footerSocials .zwiico-linkedin:hover {
+    background: #006881;
+}
+
+footer #footerSocials .zwiico-instagram {
+    background: #E4405F;
+}
+
+footer #footerSocials .zwiico-instagram:hover {
+    background: #E02246;
+}
+
+footer #footerSocials .zwiico-pinterest {
+    background: #BD081C;
+}
+
+footer #footerSocials .zwiico-pinterest:hover {
+    background: #9C0717;
+}
+
+footer #footerSocials .zwiico-twitter {
+    background: #55ACEE;
+}
+
+footer #footerSocials .zwiico-twitter:hover {
+    background: #369DEB;
+}
+
+footer #footerSocials .zwiico-youtube {
+    background: #CD201F;
+}
+
+footer #footerSocials .zwiico-youtube:hover {
+    background: #AF1B1B;
+}
+
+footer #footerSocials .zwiico-github {
+    background: #000;
+}
+
+footer #footerSocials .zwiico-github:hover {
+    background: #000;
+}
+
+footer #footerSocials .zwiico-reddit {
+    background: #FF4500;
+}
+
+footer #footerSocials .zwiico-reddit:hover {
+    background: #D23311;
+}
+
+footer #footerSocials .zwiico-steam {
+    background: #171A21;
+}
+
+footer #footerSocials .zwiico-steam:hover {
+    background: #0F1318;
+}
+
+footer #footerSocials .zwiico-vimeo {
+    background: #162221;
+}
+
+footer #footerSocials .zwiico-vimeo:hover {
+    background: #121B1E;
+}
+
+footer #footerSocials .zwiico-twitch {
+    background: #9146FF;
+}
+
+footer #footerSocials .zwiico-twitch:hover {
+    background: #703CEC;
+}
+
+
+/* Bulle de dialogue */
+
+.speech {
+    margin: 16px;
+    text-align: center;
+}
+
+.speechMimi {
+    display: block;
+    margin: auto;
+}
+
+.speechBubble {
+    display: block;
+    padding: 20px;
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    margin: 16px auto;
+    text-align: center;
+    border-radius: 2px;
+    transition: background-color .3s ease-out;
+    z-index: 100;
+}
+
+.speechBubble:before {
+    content: " ";
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+    bottom: -30px;
+    border: 20px solid;
+}
+
+
+/* Remonter en haut */
+
+#backToTop {
+    position: fixed;
+    z-index: 50;
+    right: 30px;
+    bottom: 100px;
+    padding: 13px 16px 16px;
+    /*
+	Paramétré dans le thème (9.2.21)
+	background: rgba(33, 34, 35, .8);
+	color: #FFF;*/
+    cursor: pointer;
+    display: none;
+    border-radius: 50%;
+    transition: background-color .3s ease-out;
+}
+
+#backToTop:hover {
+    background: rgba(33, 34, 35, .9);
+}
+
+#backToTop:active {
+    background: rgba(33, 34, 35, 1);
+}
+
+
+/* Message sur les cookies */
+
+#cookieConsent {
+    width: 40%;
+    margin: auto;
+    opacity: .95;
+    background: #212223;
+    position: fixed;
+    right: 0;
+    bottom: 5%;
+    left: 0;
+    color: #FFF;
+    padding: 10px;
+    z-index: 60;
+    text-align: center;
+    font-size: 1em;
+    border-radius: 5% 5% 5% 5%;
+}
+
+#cookieConsentConfirm {
+    background-color: green;
+}
+
+#cookieConsentConfirm {
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 4px 8px;
+    display: inline-block;
+    transition: background-color .3s ease-out;
+}
+
+#cookieConsentConfirm:hover {
+    filter: grayscale(50%);
+}
+
+#cookieConsent .cookieClose {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+
+/* Bloc */
+
+.block {
+    /*	border: 1px solid #D8DFE3;*/
+    padding: 20px 20px 10px;
+    margin: 20px 0;
+    word-wrap: break-word;
+    border-radius: 2px;
+}
+
+.block:first-of-type {
+    margin-top: 0;
+}
+
+.block:last-of-type {
+    margin-bottom: 0;
+}
+
+.block h4, details {
+    margin: -20px -20px 10px -20px;
+    padding: 10px;
+    /*	background: #ECEFF1;*/
+}
+
+.block h4 .openClose {
+    display: inline-flex;
+    float: right;
+}
+
+
+/* Aides */
+
+.helpButton {
+    cursor: help;
+    margin: 0 5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Lightbox */
+
+.lightbox {
+    background: #FFF;
+    width: 100vw;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.lightbox>span {
+    color: black;
+}
+
+.lightbox .lightboxButtons {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.lightbox .lightboxButtons .button {
+    width: 100%;
+    max-width: 80px;
+    margin: 0 10px;
+}
+
+
+/**
+ * Inputs
+ */
+
+
+/* Inputs génériques */
+
+input[type='email'],
+input[type='text'],
+input[type='password'],
+input[type='date'],
+input[type='datetime-local'],
+input[type='time'],
+input[type='month'],
+input[type='week'],
+input[type='number'],
+.inputFile,
+.fileUploadNameDisplay,
+select,
+textarea {
+    padding: 9px;
+    /* -1px à cause des bordures */
+    /*background: #FFF;*/
+    border: 1px solid #D8DFE3;
+    width: 100%;
+    border-radius: 2px;
+    font-family: inherit;
+    transition: border .3s ease-out;
+}
+
+select {
+    padding: 9px;
+}
+
+input[type='email']:hover,
+input[type='text']:hover,
+input[type='password']:hover,
+input[type='date']:hover,
+input[type='datetime-local']:hover,
+input[type='time']:hover,
+input[type='month']:hover,
+input[type='week']:hover,
+input[type='number']:hover,
+.inputFile:hover,
+.fileUploadNameDisplay:hover,
+select:hover,
+textarea:hover {
+    border: 1px solid;
+}
+
+input[type='email'].notice,
+input[type='text'].notice,
+input[type='password'].notice,
+input[type='date'].notice,
+input[type='datetime-local'].notice,
+input[type='time'].notice,
+input[type='month'].notice,
+input[type='week'].notice,
+input[type='number'].notice,
+.inputFile.notice,
+.fileUploadNameDisplay.notice,
+select.notice,
+textarea.notice {
+    border: 1px solid #E74C3C;
+    /*background: #FAD7D3;*/
+}
+
+input[type='email'].notice:hover,
+input[type='text'].notice:hover,
+input[type='password'].notice:hover
+input[type='date'].notice:hover,
+input[type='datetime-local'].notice:hover,
+input[type='time'].notice:hover,
+input[type='month'].notice:hover,
+input[type='week'].notice:hover,
+input[type='number'].notice:hover,
+.inputFile.notice:hover,
+.fileUploadNameDisplay.notice.hover,
+select.notice:hover,
+textarea.notice:hover {
+    border: 1px solid #A82315;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+    background: #F6F7F8 !important;
+    color: #94A5B0 !important;
+}
+
+button:disabled .zwiico-spin {
+    color: #50616C !important
+    /* Icône de soumission unique */
+}
+
+button {
+    width: 100%;
+    padding: 11px;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 2px;
+    transition: background-color .3s ease-out;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.captcha label {
+    display: inline-block;
+}
+
+
+/* Simule le padding des cols pour les inputs en dehors des cols */
+
+:not([class^="col"])>.inputWrapper {
+    padding: 10px 0;
+}
+
+
+/* Supprime le padding d'une row dans un col */
+
+[class^="col"]>.row {
+    margin: -10px;
+}
+
+
+/* Bouton */
+
+.button {
+    width: 100%;
+    display: inline-block;
+    padding: 11px;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background-color .3s ease-out;
+}
+
+
+/* Bouton redimensionnable pour le formulaire*/
+
+#formSubmit {
+    width: max-content;
+    float: right;
+}
+
+.button:hover {
+    text-decoration: none;
+}
+
+.button.disabled {
+    pointer-events: none;
+    cursor: default;
+    background: #F6F7F8 !important;
+    color: #94A5B0 !important;
+}
+
+
+/* Upload de fichiers */
+
+.inputFile {
+    margin: 0;
+    display: inline-block;
+    width: 88% !important;
+}
+/*
+.datepicker {
+    margin: 0;
+    display: inline-block;
+    width: 100% !important;
+}
+*/
+
+.inputFileDelete {
+    display: block;
+    width: 10%;
+    padding: 10px 0;
+    background: #F5F5F5;
+    text-align: center;
+    float: right;
+    /*Evite un étirement lorsqu'une erreur est affichée*/
+    /*min-height: 100%;*/
+}
+
+.inputFile:hover {
+    text-decoration: none;
+}
+
+
+/* Empêche le débordement et les sauts de ligne */
+
+.inputFileManagerWrapper {
+    display: inline;
+}
+
+.inputFileManagerWrapper>.inputFile {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* Pagination */
+
+.pagination {
+    padding: 10px 0;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+}
+
+.pagination a:hover {
+    text-decoration: none;
+}
+
+.pagination a.disabled {
+    pointer-events: none;
+    cursor: default;
+    background: #F6F7F8 !important;
+    color: #94A5B0 !important;
+}
+
+.pagination a:first-child {
+    margin-left: 0;
+}
+
+.pagination a:last-child {
+    margin-right: 0;
+}
+
+
+/* Cases à cocher (pas de display none sinon le hover ne fonctionne pas sous Chrome) */
+
+input[type='checkbox'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+input[type='checkbox']+label {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+input[type='checkbox']+label span {
+    vertical-align: middle;
+}
+
+input[type='checkbox']+label:before {
+    content: '\2713';
+    display: inline-block;
+    text-align: center;
+    color: transparent;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    background: #FDFDFD;
+    border: 1px solid #D8DFE3;
+    vertical-align: top;
+    border-radius: 2px;
+}
+
+input[type='checkbox'].notice+label:before {
+    background: #E74C3C;
+}
+
+input[type='checkbox']:hover+label:before,
+input[type='checkbox']:checked:active+label:before {
+    background: #ECEFF1;
+}
+
+input[type='checkbox']:disabled+label:before {
+    background: #F6F7F8 !important;
+}
+/* Sélecteur input de fichier */
+.fileUploadContainer {
+    position: relative;
+    display: flex; /* Changé de inline-flex à flex */
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%; /* Pour s'étendre sur toute la largeur du .inputWrapper */
+}
+
+.fileUploadContainer input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    z-index: -1;
+}
+
+.fileUploadBtn {
+    margin-top: 4px;
+    display: inline-block;
+    padding: 9px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0; /* Empêche le bouton de rétrécir */
+}
+
+.fileUploadNameDisplay {
+    margin-left: 10px;
+    color: #6c757d;
+    flex-grow: 1; /* Pour s'étirer et prendre l'espace restant */
+    overflow: hidden; /* Empêche le débordement du texte */
+    text-overflow: ellipsis; /* Ajoute des points de suspension si le texte est trop long */
+    white-space: nowrap; /* Empêche le retour à la ligne */
+    border-radius: 4px;
+}
+
+.fileUploadContainer input[type="file"]:focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.fileUploadContainer input[type="file"]:disabled + label {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* Sélecteur de date */
+
+.datepicker {
+    cursor: text;
+}
+
+.pika-select {
+    padding: 0;
+    /* À cause du padding ajouté aux selects */
+}
+
+
+/**
+ * Grille
+ */
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.row {
+    margin: 0 -10px;
+    font-size: 0;
+    /* Hack whitespace */
+}
+
+
+/* Supprime les margins du premier et du dernier élément d'un col, utile pour les cols générés depuis l'éditeur de texte. (Ne s'applique pas aux rows pour ne pas supprimer les margins négatifs) */
+
+.row>div> :first-child:not(.row) {
+    margin-top: 0;
+}
+
+.row>div> :last-child:not(.row) {
+    margin-bottom: 0;
+}
+
+.col1,
+.col2,
+.col3,
+.col4,
+.col5,
+.col6,
+.col7,
+.col8,
+.col9,
+.col10,
+.col11,
+.col12 {
+    vertical-align: top;
+    padding: 10px;
+    width: 100%;
+    min-height: 1px;
+    display: inline-block;
+}
+
+
+
+/**
+ * Grille pour tableau
+ */
+
+td.col1,
+th.col1,
+td.col2,
+th.col2,
+td.col3,
+th.col3,
+td.col4,
+th.col4,
+td.col5,
+th.col5,
+td.col6,
+th.col6,
+td.col7,
+th.col7,
+td.col8,
+th.col8,
+td.col9,
+th.col9,
+td.col10,
+th.col10,
+td.col11,
+th.col11,
+td.col12,
+th.col12 {
+    vertical-align: inherit;
+    width: 100%;
+    min-height: 1px;
+    display: table-cell;
+}
+
+td.col1,
+th.col1 {
+    width: 8.33333333%;
+}
+
+td.col2,
+th.col2 {
+    width: 16.66666667%;
+}
+
+td.col3,
+th.col3 {
+    width: 25%;
+}
+
+td.col4,
+th.col4 {
+    width: 33.33333333%;
+}
+
+td.col5,
+th.col5 {
+    width: 41.66666667%;
+}
+
+td.col6,
+th.col6 {
+    width: 50%;
+}
+
+td.col7,
+th.col7 {
+    width: 58.33333333%;
+}
+
+td.col8,
+th.col8 {
+    width: 66.66666667%;
+}
+
+td.col9,
+th.col9 {
+    width: 75%;
+}
+
+td.col10,
+th.col10 {
+    width: 83.33333333%;
+}
+
+td.col11,
+th.col11 {
+    width: 91.66666667%;
+}
+
+td.col12,
+th.col12 {
+    width: 100%;
+}
+
+
+
+
+/**
+ * Classes rapides
+ */
+
+.displayNone {
+    display: none;
+}
+
+.textAlignCenter {
+    text-align: center;
+}
+
+.textAlignRight {
+    text-align: right;
+}
+
+.verticalAlignBottom {
+    vertical-align: bottom;
+}
+
+.verticalAlignMiddle {
+    vertical-align: middle;
+}
+
+.clearBoth {
+    clear: both;
+}
+
+.colorGreen {
+    color: #27AE60;
+}
+
+.colorRed {
+    color: #E74C3C;
+}
+
+.colorOrange {
+    color: #F39C12;
+}
+
+
+/*
+* Effet accordéon
+*/
+
+.accordion {
+    padding: 0;
+    list-style: none;
+}
+
+.accordion-title {
+    display: block;
+    margin: 0;
+    padding: 0 7px;
+    line-height: 34px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.accordion-title:hover {
+    background: lightgrey;
+}
+
+.accordion-content {
+    padding: 7px;
+}
+
+
+/* Captcha
+*/
+
+.captchaNum,
+.captchaAlpha {
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.captchaNum {
+    height: 5em;
+}
+
+.captchaAlpha {
+    height: 2em;
+}
+
+.captcha input[type='text'] {
+    width: 4em;
+    text-align: center;
+    margin: auto auto auto 2em;
+}
+
+
+
+
+
+/** Etiquettes des groupes */
+
+.groupTitleLabel {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.8em;
+    margin: 1px;
+}
+
+/* =========================================
+   MEDIA QUERIES SIMPLIFIÉES - 3 BREAKPOINTS
+   ========================================= */
+
+/* --- 1. DESKTOP : Écrans >= 1098px --- */
+@media screen and (min-width: 1098px) {
+    body {
+        margin: 0;
+    }
+    
+    /* Barre d'administration */
+    #bar #barLeft {
+        float: left;
+        font-size: 16px;
+        margin-left: 20px;
+    }
+    #bar #barRight {
+        float: right;
+        font-size: 16px;
+        margin-right: 20px;
+    }
+    
+    /* Layout & Header */
+    body > header, 
+    header {
+        margin: 0 -10px;
+    }
+    section {
+        padding: 20px;
+    }
+
+    /* Menu */
+    nav #menu {
+        display: block;
+    }
+
+    /* Système de Grille (Grid) */
+    .col1 { width: 8.33333333%; }
+    .col2 { width: 16.66666667%; }
+    .col3 { width: 25%; }
+    .col4 { width: 33.33333333%; }
+    .col5 { width: 41.66666667%; }
+    .col6 { width: 50%; }
+    .col7 { width: 58.33333333%; }
+    .col8 { width: 66.66666667%; }
+    .col9 { width: 75%; }
+    .col10 { width: 83.33333333%; }
+    .col11 { width: 91.66666667%; }
+    .col12 { width: 100%; }
+
+    /* Offsets */
+    .offset1 { margin-left: 8.33333333%; }
+    .offset2 { margin-left: 16.66666667%; }
+    .offset3 { margin-left: 25%; }
+    .offset4 { margin-left: 33.33333333%; }
+    .offset5 { margin-left: 41.66666667%; }
+    .offset6 { margin-left: 50%; }
+    .offset7 { margin-left: 58.33333333%; }
+    .offset8 { margin-left: 66.66666667%; }
+    .offset9 { margin-left: 75%; }
+    .offset10 { margin-left: 83.33333333%; }
+    .offset11 { margin-left: 91.66666667%; }
+}
+
+/* --- 2. TABLETTE : Écrans 768px - 1097px --- */
+@media screen and (min-width: 768px) and (max-width: 1097px) {
+    /* Assure que le body a le padding nécessaire pour la barre fixe */
+    body.bar-fixed {
+        padding-top: 45px;
+    }
+    
+    /* Barre d'administration centrée */
+    #bar {
+        text-align: center;
+        padding: 0 1px;
+        margin: 0 1px;
+    }
+    #bar ul {
+        height: auto;
+    }
+    #bar select {
+        max-width: 220px;
+        margin: 5px;
+        text-align-last: center;
+    }
+    #bar #barLeft,
+    #bar #barRight {
+        float: none;
+        font-size: 16px;
+    }
+    #bar #displayUsername {
+        display: none;
+    }
+    
+    /* Layout & Header */
+    body > header, 
+    header {
+        margin: 0 -10px;
+    }
+    section {
+        padding: 15px;
+    }
+
+    /* Menu */
+    nav #menu {
+        display: block;
+    }
+
+    /* Grille simplifiée pour tablette */
+    .col1 { width: 8.33333333%; }
+    .col2 { width: 16.66666667%; }
+    .col3 { width: 25%; }
+    .col4 { width: 33.33333333%; }
+    .col5 { width: 41.66666667%; }
+    .col6 { width: 50%; }
+    .col7 { width: 58.33333333%; }
+    .col8 { width: 66.66666667%; }
+    .col9 { width: 75%; }
+    .col10 { width: 83.33333333%; }
+    .col11 { width: 91.66666667%; }
+    .col12 { width: 100%; }
+}
+
+/* --- 3. MOBILE : Écrans <= 767px --- */
+@media screen and (max-width: 767px) {
+    /* Global Reset */
+    body {
+        margin: 0;
+    }
+    body > header {
+        margin: 0;
+    }
+    
+    /* Barre d'administration */
+    #bar {
+        text-align: center;
+        padding: 0 1px;
+        margin: 0 1px;
+    }
+    #bar ul {
+        height: auto;
+    }
+    #bar select {
+        max-width: 220px;
+        margin: 5px;
+        text-align-last: center;
+    }
+    #bar #barLeft,
+    #bar #barRight {
+        float: none;
+        font-size: 16px;
+    }
+    #bar #displayUsername {
+        display: none;
+    }
+    
+    /* Tooltips */
+    .tippy-tooltip {
+        font-size: .8rem !important;
+    }
+    
+    /* Section */
+    section {
+        padding: 5px;
+    }
+    
+    /* Structure Flexbox Mobile - Empilement des containers */
+    .siteContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    .siteContainer > #contentLeft { order: 1; }
+    .siteContainer > #contentRight { order: 3; }
+    .siteContainer > #contentSite { order: 2; }
+
+    /* Tableaux */
+    .table thead {
+        display: none;
+    }
+    .table tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .table td {
+        display: block;
+        text-align: right;
+        width: auto;
+    }
+
+    /* Menu / Navigation */
+    body > nav {
+        margin: 0;
+    }
+    nav #toggle,
+    nav #menuLeft {
+        display: block;
+        float: none;
+    }
+    nav #menuLeft {
+        flex-direction: column;
+        float: none;
+    }
+    nav #menuRight {
+        font-size: 2em;
+    }
+    nav #menu {
+        display: none;
+        text-align: left;
+    }
+    nav li {
+        display: block;
+    }
+    nav li ul {
+        z-index: 1;
+        opacity: 1;
+        position: static;
+        min-width: inherit;
+        width: auto;
+    }
+    nav .zwiico-menu,
+    nav .zwiico-cancel {
+        font-size: 1.5em;
+    }
+
+    /* Sous-menus multi-niveaux en mode mobile */
+    nav [class*="navSubmenu"],
+    nav .navSub {
+        position: static;
+        width: 100%;
+        left: 0;
+        top: auto;
+        box-shadow: none;
+        margin: 0;
+        padding-left: 0;
+    }
+
+    nav li.navParent {
+        position: relative;
+    }
+
+    nav [class*="navSubmenu"] a,
+    nav .navSub a {
+        display: block;
+        width: 100%;
+    }
+
+    nav #menu .navLevel1 { 
+        padding-left: 15px; 
+        margin-left: 15px;
+    }
+    nav #menu .navLevel2 { 
+        padding-left: 30px; 
+        margin-left: 30px;
+    }
+    nav #menu .navLevel3 { 
+        padding-left: 45px; 
+        margin-left: 45px;
+    }
+    nav #menu .navLevel4 { 
+        padding-left: 60px; 
+        margin-left: 60px;
+    }
+
+    nav #menu .navLevel1 > a {  
+        padding-left: 15px; 
+        margin-left: 15px;
+    }
+    nav #menu .navLevel2 > a { 
+        padding-left: 30px; 
+        margin-left: 30px;
+    }
+    nav #menu .navLevel3 > a { 
+        padding-left: 45px; 
+        margin-left: 45px;
+    }
+    nav #menu .navLevel4 > a { 
+        padding-left: 60px; 
+        margin-left: 60px;
+    }
+
+    /* Footer */
+    body > footer {
+        margin: 0;
+    }
+    footer .col4 {
+        width: 100%;
+    }
+    #footerCopyright,
+    #footerText,
+    #footerSocials {
+        display: flex;
+        justify-content: center;
+    }
+
+    header {
+        background-size: cover !important;
+    }
+}
